@@ -5,6 +5,7 @@ const {
 } = require("../lib/random");
 
 const Potion = require("../lib/Potion");
+const Character = require("../lib/Character");
 
 // test("check if 10 is equal to 10", () => {
 //   expect(checkIfEqual(10, 10)).toBe(true);
@@ -70,8 +71,22 @@ test("Creates an ability Potion", () => {
 
 test("Creates a random potion object", () => {
   const potion = new Potion();
-
   expect(potion.name).toEqual(expect.any(String));
-  expect(potion.name.length).toBeGreaterThan(4);
+  expect(potion.name.length).toBeGreaterThanOrEqual(4);
   expect(potion.value).toEqual(expect.any(Number));
+});
+
+test("Creates a Character", () => {
+  const character = new Character("GeeTheGladiator");
+  console.log("Character Name", character.name.length);
+  expect(character.name).toEqual(expect.any(String));
+  expect(character.name.length).toBeGreaterThan(5);
+});
+test("Character abilities are default, h:40, aglt:1, s:1, a:2", () => {
+  const character = new Character("GeeTheGladiator");
+
+  expect(character.agility).toEqual(1);
+  expect(character.strength).toEqual(1);
+  expect(character.health).toEqual(40);
+  expect(character.attack).toEqual(2);
 });
