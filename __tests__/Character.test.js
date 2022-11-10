@@ -63,3 +63,40 @@ test("Getting inventory from character or return false", () => {
 
   expect(character.getInventory()).toEqual([]);
 });
+
+test("get a character's health", () => {
+  const character = new Character("GeeTheGladiator");
+
+  expect(character.getHealth()).toEqual(
+    expect.stringContaining(character.health.toString())
+  );
+});
+
+test("get a character's Fight Stats", () => {
+  const character = new Character("GeeTheGladiator");
+  const fightStats = character.getFightStats();
+  console.log(fightStats);
+});
+
+test("check if player is alive or not", () => {
+  const character = new Character("GeeTheGladiator");
+
+  // first check when full health
+  expect(character.isAlive).toBeTruthy();
+  // second check when not true
+  character.health = 0;
+  expect(character.health).toBeFalsy();
+});
+
+test("subtracts from player's health", () => {
+  const character = new Character("GeeTheGladiator");
+
+  const oldHealth = character.health;
+
+  character.reduceHealth(5);
+
+  expect(character.health).toBe(oldHealth - 5);
+
+  character.reduceHealth(999);
+  expect(character.health).toBeFalsy();
+});
