@@ -100,3 +100,11 @@ test("subtracts from player's health", () => {
   character.reduceHealth(999);
   expect(character.health).toBeFalsy();
 });
+
+test("Character attack is calculated", () => {
+  const character = new Character("GeeTheGladiator");
+  const minDamage = character.attack + character.strength;
+  console.log(minDamage);
+  console.log(character.getDamage());
+  expect(character.getDamage()).toBeGreaterThan(minDamage);
+});
