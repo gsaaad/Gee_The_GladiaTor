@@ -1,9 +1,10 @@
 const Character = require("../lib/Character");
 // const Potion = require("../lib/__mocks__/Potion");
 const Potion = require("../lib/Potion");
+
 jest.mock("../lib/Potion.js");
 
-// console.log(new Potion());
+console.log(new Potion());
 
 test("Creates a Character", () => {
   const character = new Character("GeeTheGladiator");
@@ -38,7 +39,6 @@ test("Character has potions in inventory, inventory is 2", () => {
   //   console.log("Health Potion", healthPotion);
   //   console.log("Total inventory: ", characterInventory);
 
-  expect(healthPotion.name).toBe("health");
   expect(randomPotion.name).toEqual(expect.any(String));
   expect(characterInventory.length).toBe(2);
 });
@@ -107,4 +107,33 @@ test("Character attack is calculated", () => {
   console.log(minDamage);
   console.log(character.getDamage());
   expect(character.getDamage()).toBeGreaterThan(minDamage);
+});
+
+test("Character defence is calculated", () => {
+  const character = new Character("GeeTheGladiator");
+
+  const minDefence = character.defence + character.strength;
+  console.log(character.getDefence());
+  expect(character.getDefence()).toBeGreaterThan(minDefence);
+});
+
+test("Adds a potion to the inventory", () => {
+  const character = new Character("GeeTheGladiator");
+
+  const oldCount = character.inventory.length;
+  console.log("character inventory count:", oldCount);
+
+  character.addPotion(new Potion());
+  expect(character.inventory.length).toBeGreaterThan(oldCount);
+});
+
+test("Uses a potion from inventory", () => {
+  const character = new Character("GeeTheGladiator");
+  character.inventory = [new Potion(), new Potion(), new Potion()];
+
+  const oldCount = character.inventory.length;
+
+  character.usePotion(1);
+
+  expect(character.inventory.length).toBeLessThan(oldCount);
 });
