@@ -98,7 +98,7 @@ test("subtracts from player's health", () => {
   expect(character.health).toBe(oldHealth - 5);
 
   character.reduceHealth(999);
-  expect(character.health).toBeFalsy();
+  expect(character.health).toBe(0);
 });
 
 test("Character attack is calculated", () => {
